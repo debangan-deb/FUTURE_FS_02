@@ -7,7 +7,7 @@ export default function MyOrders() {
 
     useEffect(() => {
         if (!token) return;
-        fetch("http://localhost:5000/my-orders", {
+        fetch("https://shopnext-wxjd.onrender.com/my-orders", {
             headers: { Authorization: token }
         })
             .then(res => res.json())

@@ -22,7 +22,7 @@ const Support = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/support", {
+      const response = await fetch("https://shopnext-wxjd.onrender.com/support", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

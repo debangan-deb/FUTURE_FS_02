@@ -68,7 +68,7 @@ export default function Login() {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch("https://shopnext-wxjd.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -96,7 +96,7 @@ export default function Login() {
     if (!email) return toast.error("Enter your email");
 
     setLoading(true);
-    const res = await fetch("http://localhost:5000/send-reset-otp", {
+    const res = await fetch("https://shopnext-wxjd.onrender.com/send-reset-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -115,7 +115,7 @@ export default function Login() {
   const verifyOtp = async () => {
     if (!otp) return toast.error("Enter the OTP");
 
-    const res = await fetch("http://localhost:5000/verify-otp", {
+    const res = await fetch("https://shopnext-wxjd.onrender.com/verify-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, otp }),
@@ -142,7 +142,7 @@ export default function Login() {
     }
 
     setLoading(true);
-    const res = await fetch("http://localhost:5000/reset-password", {
+    const res = await fetch("https://shopnext-wxjd.onrender.com/reset-password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, otp, password: newPassword }),

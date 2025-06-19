@@ -24,7 +24,7 @@ export default function Checkout() {
   };
 
   const placeCODOrder = async () => {
-    const result = await fetch("http://localhost:5000/order", {
+    const result = await fetch("https://shopnext-wxjd.onrender.com/order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -64,7 +64,7 @@ export default function Checkout() {
       return;
     }
 
-    const orderData = await fetch("http://localhost:5000/create-payment", {
+    const orderData = await fetch("https://shopnext-wxjd.onrender.com/create-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: total })
@@ -79,7 +79,7 @@ export default function Checkout() {
       description: "Order Payment",
       order_id: order.id,
       handler: async function (response) {
-        const result = await fetch("http://localhost:5000/order", {
+        const result = await fetch("https://shopnext-wxjd.onrender.com/order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

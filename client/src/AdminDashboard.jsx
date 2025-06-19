@@ -10,7 +10,7 @@ export default function AdminDashBoard() {
   const [editFields, setEditFields] = useState({});
 
   const load = async () => {
-    const res = await fetch("http://localhost:5000/admin-dashboard");
+    const res = await fetch("https://shopnext-wxjd.onrender.com/admin-dashboard");
     const json = await res.json();
     setData(json);
   };
@@ -20,7 +20,7 @@ export default function AdminDashBoard() {
   }, []);
 
   const add = async () => {
-    await fetch("http://localhost:5000/admin/product", {
+    await fetch("https://shopnext-wxjd.onrender.com/admin/product", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, category, price, image }),
@@ -33,14 +33,14 @@ export default function AdminDashBoard() {
   };
 
   const del = async (id) => {
-    await fetch("http://localhost:5000/admin/product/" + id, {
+    await fetch("https://shopnext-wxjd.onrender.com/admin/product/" + id, {
       method: "DELETE",
     });
     load();
   };
 
   const update = async (id) => {
-    await fetch("http://localhost:5000/admin/product/" + id, {
+    await fetch("https://shopnext-wxjd.onrender.com/admin/product/" + id, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(editFields),

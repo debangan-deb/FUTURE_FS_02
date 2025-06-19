@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 export default function Navbar() {
   const { cart, token, logout } = useApp();
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState(false); // for collapse control
+  const [expanded, setExpanded] = useState(false); 
 
   const isAdmin = token === "admin";
   const isUser = token && !isAdmin;

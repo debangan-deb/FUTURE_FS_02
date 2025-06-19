@@ -45,7 +45,7 @@ export default function Profile() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/${isAdmin ? "admin" : "user"}/info`, {
+    fetch(`https://shopnext-wxjd.onrender.com/${isAdmin ? "admin" : "user"}/info`, {
       headers: { Authorization: token },
     })
       .then(res => res.json())
@@ -63,7 +63,7 @@ export default function Profile() {
       }
     }
 
-    const res = await fetch(`http://localhost:5000/${isAdmin ? "admin" : "user"}/update`, {
+    const res = await fetch(`https://shopnext-wxjd.onrender.com/${isAdmin ? "admin" : "user"}/update`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default function Profile() {
   };
 
   const confirmDelete = async () => {
-    const res = await fetch("http://localhost:5000/user/delete", {
+    const res = await fetch("https://shopnext-wxjd.onrender.com/user/delete", {
       method: "DELETE",
       headers: { Authorization: token },
     });

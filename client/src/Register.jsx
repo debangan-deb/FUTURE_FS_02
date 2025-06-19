@@ -59,7 +59,7 @@ export default function Register() {
       return toast.error("Passwords do not match");
     }
     setLoading(true);
-    const res = await fetch("http://localhost:5000/send-otp", {
+    const res = await fetch("https://shopnext-wxjd.onrender.com/send-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email }),
@@ -80,7 +80,7 @@ export default function Register() {
       return;
     }
 
-    const otpRes = await fetch("http://localhost:5000/verify-otp", {
+    const otpRes = await fetch("https://shopnext-wxjd.onrender.com/verify-otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, otp: enteredOtp }),
@@ -90,7 +90,7 @@ export default function Register() {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/register", {
+    const res = await fetch("https://shopnext-wxjd.onrender.com/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),

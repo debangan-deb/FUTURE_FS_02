@@ -249,7 +249,7 @@ r.post("/reset-password", async (req, res) => {
 
   await sendMail(email, "Password Changed for your ShopNext Account", `
     <h3>Your password has been changed</h3>
-    <p>If you haven't done this, please contact <a href="http://localhost:5173/support">Customer Support</a> immediately.</p>
+    <p>If you haven't done this, please contact Customer Support immediately.</p>
   `);
 
   res.send("Password Reset Successful");

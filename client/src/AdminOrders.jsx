@@ -4,12 +4,12 @@ export default function AdminOrders() {
   const [orders, setOrders] = useState([]);
 
   const fetchOrders = () =>
-    fetch("http://localhost:5000/admin/orders")
+    fetch("https://shopnext-wxjd.onrender.com/admin/orders")
       .then(res => res.json())
       .then(setOrders);
 
   const updateStatus = async (id, status) => {
-    await fetch("http://localhost:5000/admin/update-status", {
+    await fetch("https://shopnext-wxjd.onrender.com/admin/update-status", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, status }),

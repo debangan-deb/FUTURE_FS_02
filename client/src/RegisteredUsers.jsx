@@ -15,7 +15,7 @@ export default function RegisteredUsers() {
       return;
     }
 
-    fetch("http://localhost:5000/admin/users")
+    fetch("https://shopnext-wxjd.onrender.com/admin/users")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
         return res.json();

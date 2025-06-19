@@ -17,7 +17,7 @@ export default function Admin() {
   }, [token]);
 
 const login = async () => {
-  const res = await fetch("http://localhost:5000/admin", {
+  const res = await fetch("https://shopnext-wxjd.onrender.com/admin", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),

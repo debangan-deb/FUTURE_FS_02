@@ -24,7 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     if (category)
-      fetch("http://localhost:5000/products")
+      fetch("https://shopnext-wxjd.onrender.com/products")
         .then(res => res.json())
         .then(data => {
           const items = data.filter(p => p.category === category);
