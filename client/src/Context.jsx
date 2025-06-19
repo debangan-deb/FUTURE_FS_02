@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-
+import {toast} from "react-hot-toast";
 const Ctx = createContext();
 export const useApp = () => useContext(Ctx);
 
@@ -20,13 +20,17 @@ export default function Provider({ children }) {
     setToken("");
   };
 
-  const add = (p) => setCart([...cart, p]);
+  const add = (p) => {
+    setCart([...cart, p]);
+    toast.success("Added 1 item to cart");
+  }
   const remove = (productToRemove) => {
     const index = cart.findIndex((item) => item.id === productToRemove.id);
     if (index !== -1) {
       const newCart = [...cart];
       newCart.splice(index, 1);
       setCart(newCart);
+      toast.success("Removed 1 item from cart");
     }
   };
 

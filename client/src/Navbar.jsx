@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 export default function Navbar() {
   const { cart, token, logout } = useApp();
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState(false); 
+  const [expanded, setExpanded] = useState(false);
 
   const isAdmin = token === "admin";
   const isUser = token && !isAdmin;
@@ -54,7 +54,16 @@ export default function Navbar() {
 
         <div className={`collapse navbar-collapse ${expanded ? "show" : ""}`} id="navbarNav">
           <div className="ms-auto d-flex flex-column flex-lg-row gap-2 align-items-start align-items-lg-center pt-3 pt-lg-0">
-            <Link to="/" className="btn btn-secondary" onClick={closeMenu}>Home</Link>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                navigate("/", { replace: true });
+                window.location.reload(); 
+                closeMenu();
+              }}
+            >
+              Home
+            </button>
 
             {!token && (
               <>

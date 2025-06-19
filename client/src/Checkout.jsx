@@ -9,6 +9,7 @@ export default function Checkout() {
   const [address, setAddr] = useState("");
   const [phone, setPhone] = useState("");
   const [paymentMode, setPaymentMode] = useState("");
+  const [loading, setLoading] = useState(false); // New state
   const navigate = useNavigate();
 
   const total = cart.reduce((sum, p) => sum + parseFloat(p.price), 0);
@@ -24,26 +25,32 @@ export default function Checkout() {
   };
 
   const placeCODOrder = async () => {
-    const result = await fetch("https://shopnext-wxjd.onrender.com/order", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name,
-        address,
-        phone,
-        total,
-        token,
-        items: cart,
-        payment_id: "COD"
-      })
-    });
+    try {
+      const result = await fetch("https://shopnext-wxjd.onrender.com/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          address,
+          phone,
+          total,
+          token,
+          items: cart,
+          payment_id: "COD"
+        })
+      });
 
-    if (result.ok) {
-      setCart([]);
-      toast.success("✅ Order placed successfully");
-      navigate("/cart");
-    } else {
-      toast.error("❌ Order failed");
+      if (result.ok) {
+        setCart([]);
+        toast.success("✅ Order placed successfully");
+        navigate("/cart");
+      } else {
+        toast.error("❌ Order failed");
+      }
+    } catch (error) {
+      toast.error("❌ Network error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,14 +60,17 @@ export default function Checkout() {
       return;
     }
 
+    setLoading(true);
+
     if (paymentMode === "cod") {
-      placeCODOrder();
+      await placeCODOrder();
       return;
     }
 
     const res = await loadRazorpay();
     if (!res) {
       alert("Razorpay SDK failed to load");
+      setLoading(false);
       return;
     }
 
@@ -69,6 +79,7 @@ export default function Checkout() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: total })
     });
+
     const order = await orderData.json();
 
     const options = {
@@ -100,6 +111,8 @@ export default function Checkout() {
         } else {
           toast.error("❌ Order failed");
         }
+
+        setLoading(false);
       },
       prefill: {
         name,
@@ -111,6 +124,7 @@ export default function Checkout() {
       modal: {
         ondismiss: () => {
           toast.error("❌ Order failed or cancelled");
+          setLoading(false);
         }
       }
     };
@@ -186,8 +200,20 @@ export default function Checkout() {
           </div>
         </div>
 
-        <button className="btn btn-primary w-100 fw-semibold" onClick={pay}>
-          Pay ₹{total.toFixed(2)}
+        {/* Spinner and message */}
+        {loading && (
+          <div className="text-center mb-3">
+            <div className="spinner-border text-primary" role="status" />
+            <div className="mt-2">Please wait...</div>
+          </div>
+        )}
+
+        <button
+          className="btn btn-primary w-100 fw-semibold"
+          onClick={pay}
+          disabled={loading}
+        >
+          {loading ? "Processing..." : `Pay ₹${total.toFixed(2)}`}
         </button>
       </div>
     </div>
