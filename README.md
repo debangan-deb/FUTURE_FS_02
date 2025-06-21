@@ -1,6 +1,6 @@
 It is a sinple shopping website 
 named "ShopNext" which contains certain 
-product categories clicking om which
+product categories clicking on which
 opens a few products of that category.
 These products are added by admin.
 It has cart option but before accessing that
